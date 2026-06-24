@@ -1,0 +1,24 @@
+# Personal knowledge base — tidak di-track
+.openkb/PERSONAL/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node
+node_modules/
+npm-debug.log
+
+# PHP
+vendor/
+composer.lock
+
+# Build
+dist/
+build/
