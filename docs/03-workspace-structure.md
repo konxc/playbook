@@ -27,13 +27,18 @@ konxc/playbook/
 │
 ├── workspace/                 # Partner playbooks (submodules)
 │   ├── smauiiyk/              → git@github.com:SMA-UII-Yogyakarta/playbook.git
-│   │
-│   └── orgs/                  # Future partners
-│       ├── client1/           → git@github.com:client1/playbook.git
-│       └── client2/           → git@github.com:client2/playbook.git
+│   ├── client1/               → git@github.com:client1/playbook.git
+│   ├── personal-user/         → git@github.com:Sandikodev/playbook.git
+│   └── {slug}/                → git@github.com:{org-or-user}/playbook.git
 │
 └── .gitmodules                # Submodule configuration
 ```
+
+**Naming Convention:**
+- Gunakan **slug name** (lowercase, hyphen-separated)
+- Untuk organization: `{org-slug}` (e.g., `smauiiyk`, `client1`)
+- Untuk personal account: `{username}` (e.g., `sandikodev`, `personal-user`)
+- Semua langsung di root `workspace/` (flat structure)
 
 ---
 
@@ -45,22 +50,28 @@ konxc/playbook/
 # Navigate to workspace directory
 cd workspace
 
-# Add SMA UII Yogyakarta playbook
+# Add SMA UII Yogyakarta playbook (organization)
 git submodule add git@github.com:SMA-UII-Yogyakarta/playbook.git smauiiyk
 
-# For future partners (flat structure in orgs/)
-git submodule add git@github.com:client1/playbook.git orgs/client1
+# Add personal account playbook (individual)
+git submodule add git@github.com:Sandikodev/playbook.git sandikodev
+
+# Add another client playbook
+git submodule add git@github.com:client1/playbook.git client1
 ```
 
 **Result:**
 ```
 workspace/
-├── smauiiyk/                  # Submodule linked
-├── orgs/
-│   └── client1/               # Submodule linked
-│
-└── .gitmodules                # Auto-created/updated
+├── smauiiyk/                  # Organization submodule
+├── sandikodev/                # Personal account submodule
+└── client1/                   # Organization submodule
 ```
+
+**Slug Naming:**
+- `smauiiyk` → dari `github.com/SMA-UII-Yogyakarta/playbook`
+- `sandikodev` → dari `github.com/Sandikodev/playbook`
+- `client1` → dari `github.com/client1/playbook`
 
 ---
 
@@ -367,25 +378,40 @@ workspace/
 
 ```
 workspace/
-├── smauiiyk/
-├── client1/
-└── client2/
+├── smauiiyk/       # SMA UII Yogyakarta
+├── client1/        # Client 1
+└── sandikodev/     # Personal/Sandikodev
 ```
 
 **Characteristics:**
-- 3-5 partners
-- Flat structure
+- 3-5 partners (mix of org + personal)
+- Flat structure (all in root workspace/)
+- Slug-based naming
 - Need automation
 
 ---
 
-### Phase 3: Organization Partners (Q4 2026)
+### Phase 3: Many Partners (2027+)
 
 ```
 workspace/
-└── orgs/
-    ├── smauiiyk/
-    ├── client1/
+├── education/
+│   └── smauiiyk/
+├── healthcare/
+│   ├── hospital1/
+│   └── clinic2/
+├── enterprise/
+│   └── company1/
+└── personal/
+    └── sandikodev/
+```
+
+**Characteristics:**
+- 10+ partners
+- Grouped by industry (optional)
+- Flat within groups
+- Full automation
+```
     └── client2/
 ```
 

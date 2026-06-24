@@ -38,13 +38,20 @@ konxc/playbook (Master)
 │
 ├── workspace/                 # Partner playbooks (git submodules)
 │   ├── smauiiyk/              → SMA-UII-Yogyakarta/playbook
-│   └── orgs/                  → Future partners
-│       └── {client}/          → {org}/playbook
+│   ├── client1/               → client1/playbook
+│   ├── {org-slug}/            → {org-or-user}/playbook
+│   └── ...                    → Future partners
 │
 └── templates/                 # Templates untuk partner baru
     ├── new-partner-checklist.md
     └── playbook-structure-template.md
 ```
+
+**Workspace Naming:**
+- Flat structure (semua di root `workspace/`)
+- Slug-based: `{org-slug}` atau `{username}`
+- Organization: `smauiiyk` (dari `SMA-UII-Yogyakarta`)
+- Personal: `sandikodev` (dari GitHub username)
 
 ---
 
@@ -66,22 +73,27 @@ konxc/playbook (Master)
 
 #### Current Partners
 
-| Partner | Playbook | Status |
-|---|---|---|
-| **SMA UII Yogyakarta** | [`smauiiyk/`](workspace/smauiiyk/) | ✅ Active (v1.0.0) |
-| *Your Organization* | `orgs/{your-org}/` | 📝 Coming Soon |
+| Partner | Playbook | Type | Status |
+|---|---|---|---|
+| **SMA UII Yogyakarta** | [`smauiiyk/`](workspace/smauiiyk/) | Organization | ✅ Active (v1.0.0) |
+| **{Your Org}** | `{slug}/` | Organization/Personal | 📝 Coming Soon |
 
-**Structure:**
+**Examples:**
 ```
 workspace/
 ├── smauiiyk/              # Git submodule → SMA-UII-Yogyakarta/playbook
-│   ├── docs/              # SMA UII specific documentation
-│   ├── templates/         # SMA UII templates
-│   └── project/           # SMART Absen project plans
-│
-└── orgs/
-    └── {client}/          # Git submodule → {org}/playbook
-        └── ...            # Client-specific playbook
+├── client1/               # Git submodule → client1/playbook
+├── sandikodev/            # Git submodule → Sandikodev/playbook
+└── {slug}/                # Git submodule → {org-or-user}/playbook
+```
+
+**Structure Inside Each:**
+```
+workspace/{slug}/
+├── docs/                  # Partner-specific documentation
+├── templates/             # Partner templates
+├── project/               # Project-specific plans
+└── README.md              # Partner overview
 ```
 
 ---
