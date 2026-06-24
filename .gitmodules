@@ -1,0 +1,3 @@
+[submodule "workspace/smauiiyk"]
+	path = workspace/smauiiyk
+	url = git@github.com:SMA-UII-Yogyakarta/playbook.git
