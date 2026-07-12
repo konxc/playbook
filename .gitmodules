@@ -1,3 +1,6 @@
 [submodule "workspace/smauiiyk"]
 	path = workspace/smauiiyk
 	url = git@github.com:SMA-UII-Yogyakarta/playbook.git
+[submodule "workspace/pantisajadah"]
+	path = workspace/pantisajadah
+	url = git@github.com-pantisajadah:pantisajadah/playbook.git
