@@ -8,9 +8,9 @@
 
 | | Organization | Personal |
 |---|---|---|
-| **Repo name** | `{org}/playbook` | `{username}/playbook` |
-| **Extra repos** | `{org}/.github` | Tidak perlu |
-| **Website repo** | `{org}/{project}` | `{username}/{username}.github.io` |
+| **Profile repo** | `{org}/.github` — org profile & default repo | `{username}/{username}` — personal profile & GitHub README |
+| **Playbook repo** | `{org}/playbook` | `{username}/playbook` |
+| **Website repo** | `{org}/{project}.github.io` | `{username}/{username}.github.io` |
 | **Templates location** | `{org}/.github/` (repo terpisah) | `{username}/playbook/.github/` (di dalam playbook) |
 
 ---

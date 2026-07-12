@@ -54,6 +54,7 @@
 
 **Personal Account:**
 ```markdown
+- [ ] Create {username}/{username} profile repo (personal GitHub profile)
 - [ ] Create {username}/playbook repository
 - [ ] Create {username}/{username}.github.io repository
 - [ ] Initialize playbook dengan README.md

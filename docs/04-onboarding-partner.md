@@ -10,15 +10,22 @@
 
 **Penting:** Setiap partner harus menentukan tipe akun GitHub sebelum onboarding dimulai.
 
+**Istilah Universal:**
+- **`{mitra}`** — penulisan universal untuk merujuk ke partner (baik org maupun personal)
+- **`{org}`** — khusus untuk tipe Organization Account
+- **`{username}`** — khusus untuk tipe Personal Account
+
 | Aspek | Organization Account | Personal Account |
 |---|---|---|
-| **Contoh** | `SMA-UII-Yogyakarta`, `amalshalih` | `pantisajadah`, `klubfisika` |
+| **Contoh** | `SMA-UII-Yogyakarta` | `pantisajadah` |
 | **Kapan pakai** | Tim besar (3+ orang), ada struktur org | Tim kecil (1-2 orang), yayasan perorangan |
 | **GitHub URL** | `github.com/{org}` | `github.com/{username}` |
-| **Required repos** | `{org}/playbook`, `{org}/.github`, `{org}/{project}` | `{username}/playbook`, `{username}/{username}.github.io` |
+| **Profile repo** | `{org}/.github` — org profile & default repo | `{username}/{username}` — personal profile & GitHub README |
+| **Playbook repo** | `{org}/playbook` | `{username}/playbook` |
+| **Website repo** | `{org}/{project}.github.io` | `{username}/{username}.github.io` |
 | **Branch structure** | `main` (source) + `gh-pages` (build) | `main` (source) + `handoff` (onboarding) + `gh-pages` (build) |
-| **Org-level templates** | ✅ Wajib (`{org}/.github` repo) | ❌ Tidak perlu (templates di repo lokal) |
-| **Submodule ke master** | `workspace/{org-slug}` | `workspace/{username}` |
+| **Org-level templates** | ✅ Wajib (`{org}/.github` repo) | ❌ Tidak perlu (templates di repo `{username}/playbook/.github/`) |
+| **Submodule ke master** | `workspace/{org}` | `workspace/{username}` |
 
 #### Decision Tree
 
@@ -26,12 +33,12 @@
 Partner punya tim >2 orang?
 ├── YA → Organization Account
 │   ├── Buat org di github.com/orgs/new
-│   ├── Required: {org}/playbook, {org}/.github
+│   ├── Required: {org}/.github, {org}/playbook
 │   └── Branch: main + gh-pages
 │
 └── TIDAK → Personal Account
     ├── Pakai akun personal partner
-    ├── Required: {username}/playbook, {username}/{username}.github.io
+    ├── Required: {username}/{username}, {username}/playbook
     └── Branch: main + handoff + gh-pages
 ```
 
@@ -326,20 +333,74 @@ Duration: 90 menit
 > Untuk partner dengan tim kecil (1-2 orang), yayasan perorangan, atau akun personal yang mewakili organisasi.
 
 **Perbedaan utama dari Org:**
-- Tidak perlu `{username}/.github` repo (templates langsung di repo playbook)
-- Repo `{username}/{username}.github.io` berfungsi ganda: website resmi + onboarding
+- Profile repo: `{username}/{username}` (personal GitHub profile, pengganti `{org}/.github`)
+- Playbook repo: `{username}/playbook`
+- Website repo: `{username}/{username}.github.io` berfungsi ganda: website resmi + onboarding
 - Branch structure: `main` (source), `handoff` (onboarding docs), `gh-pages` (build output)
 - Akun GitHub dipegang oleh tim IT yayasan (email teknis, tidak dipublikasikan)
+- Templates diletakkan di `{username}/playbook/.github/` (bukan repo terpisah)
 
-#### Step P1: Create Partner Playbook Repo
+**Required repos untuk personal account:**
+| Repo | Purpose |
+|---|---|
+| `{username}/{username}` | Personal profile repo (GitHub README profile, seperti `{org}/.github` untuk org) |
+| `{username}/playbook` | Engineering playbook |
+| `{username}/{username}.github.io` | Website resmi + onboarding |
+
+#### Step P1: Create Profile Repo
 
 **PIC:** Sandikodev
 
 ```bash
-# 1. Partner buat repo baru di GitHub
+# 1. Buat repo {username}/{username} di GitHub
+# Name: {username}/{username}
+# Visibility: Public
+# Description: "Profile — {org name}"
+#
+# Ini adalah personal profile repo (mirip {org}/.github untuk organization)
+# Bisa berisi README.md profile yang muncul di github.com/{username}
+
+# 2. Initialize dengan README profile
+cat > README.md << 'EOF'
+# {org name}
+
+> {org description}
+
+## 🏢 Tentang Kami
+
+Yayasan Sadaqah Jariyah Dambaan Ummah — Technopreneur Qur'ani
+
+## 🔗 Links
+
+- [Website Resmi](https://{username}.github.io)
+- [Playbook](https://github.com/{username}/playbook)
+- [Donasi](https://donasi.sajadah.or.id)
+
+## 📞 Contact
+
+📧 yayasan.sajadah01@gmail.com
+📱 +62 831-4645-2122
+EOF
+
+# 3. Push ke GitHub
+git init
+git add README.md
+git commit -m "feat: initial profile"
+git remote add origin git@github.com:{username}/{username}.git
+git push -u origin main
+```
+
+---
+
+#### Step P2: Create Playbook Repo
+
+**PIC:** Sandikodev
+
+```bash
+# 1. Buat repo {username}/playbook di GitHub
 # Name: {username}/playbook
 # Visibility: Private (default)
-# Description: "Engineering playbook for {org name}"
+# Description: "Engineering playbook — {org name}"
 
 # 2. Initialize dengan README
 echo "# {org name} — Engineering Playbook" > README.md
@@ -356,7 +417,7 @@ git push -u origin main
 
 ---
 
-#### Step P2: Create Website Repo with Branch Structure
+#### Step P3: Create Website Repo with Branch Structure
 
 **PIC:** Sandikodev
 
@@ -405,7 +466,7 @@ git checkout main
 
 ---
 
-#### Step P3: Add to Master Workspace
+#### Step P4: Add to Master Workspace
 
 **PIC:** Sandikodev
 
@@ -429,9 +490,9 @@ git push origin main
 
 ---
 
-#### Step P4: Setup Org-Level Templates (in Playbook Repo)
+#### Step P5: Setup Templates (in Playbook Repo)
 
-Karena personal account tidak punya `{username}/.github` repo, templates diletakkan di playbook repo:
+Karena personal account tidak punya `{org}/.github` repo, templates diletakkan di playbook repo `{username}/playbook/.github/`:
 
 ```bash
 cd {username}/playbook
@@ -453,7 +514,7 @@ git push origin main
 
 ---
 
-#### Step P5: Populate Playbook
+#### Step P6: Populate Playbook
 
 **PIC:** Partner Lead + Sandikodev (mentoring)
 
@@ -503,7 +564,7 @@ Week 4:
 
 ---
 
-#### Step P6: Account Credential Management
+#### Step P7: Account Credential Management
 
 **Penting untuk Personal Account:**
 

@@ -44,9 +44,11 @@ konxc/playbook/
 
 | | Organization | Personal |
 |---|---|---|
-| **Workspace slug** | `{org-slug}` | `{username}` |
+| **Profile repo** | `{org}/.github` — org profile & default repo | `{username}/{username}` — personal profile & GitHub README |
+| **Playbook repo** | `{org}/playbook` | `{username}/playbook` |
+| **Website repo** | `{org}/{project}.github.io` | `{username}/{username}.github.io` |
+| **Workspace slug** | `{org}` | `{username}` |
 | **Submodule URL** | `git@github.com:{org}/playbook.git` | `git@github.com:{username}/playbook.git` |
-| **Website repo** | `{org}/{project}.git` | `{username}/{username}.github.io.git` |
 | **Branch (website)** | `main` + `gh-pages` | `main` + `handoff` + `gh-pages` |
 | **Templates** | `{org}/.github/` (repo terpisah) | `{username}/playbook/.github/` (di playbook) |
 | **Credential** | Org owner mengelola | Tim IT yayasan mengelola |
