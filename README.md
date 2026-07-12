@@ -66,6 +66,7 @@ konxc/playbook (Master)
 | [`workspace-structure.md`](docs/03-workspace-structure.md) | Git submodule workspace pattern | Sandikodev |
 | [`onboarding-partner.md`](docs/04-onboarding-partner.md) | Onboarding partner baru | Sandikodev |
 | [`quality-standard.md`](docs/05-quality-standard.md) | Quality audit checklist | QA |
+| [`github-ecosystem.md`](docs/06-github-ecosystem.md) | GitHub mitra — akun, repo, branch, deployment | All |
 
 ---
 
