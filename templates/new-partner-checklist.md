@@ -12,11 +12,23 @@
 
 ---
 
+## ⚡ Partner Account Type
+
+**Tentukan tipe akun terlebih dahulu:**
+
+| | Organization | Personal |
+|---|---|---|
+| **Gunakan jika** | Tim >2 orang | Tim 1-2 orang, yayasan perorangan |
+| **Contoh** | SMA-UII-Yogyakarta | pantisajadah |
+| **Skip langkah** | — | Langkah bertanda `[ORG ONLY]` |
+
+---
+
 ## ✅ Pre-Onboarding (Before Day 1)
 
 ```markdown
 - [ ] Partnership agreement signed
-- [ ] GitHub organization created
+- [ ] GitHub account created (org ATAU personal — lihat tipe di atas)
 - [ ] Contact person identified
 - [ ] Initial project scope defined
 - [ ] Team size confirmed
@@ -29,12 +41,29 @@
 
 ### Day 1: Repository Setup
 
+**Organization Account:**
 ```markdown
 - [ ] Create {org}/playbook repository
-- [ ] Initialize dengan README.md
+- [ ] Create {org}/.github repository (org-level templates)
+- [ ] Initialize playbook dengan README.md
 - [ ] Add Sandikodev sebagai collaborator
 - [ ] Clone playbook repo locally
 - [ ] Copy playbook structure template
+- [ ] Commit initial structure
+```
+
+**Personal Account:**
+```markdown
+- [ ] Create {username}/playbook repository
+- [ ] Create {username}/{username}.github.io repository
+- [ ] Initialize playbook dengan README.md
+- [ ] Add Sandikodev sebagai collaborator
+- [ ] Clone playbook repo locally
+- [ ] Copy playbook structure template
+- [ ] Setup branch structure untuk github.io:
+  - [ ] main = source code
+  - [ ] handoff = onboarding documentation
+  - [ ] gh-pages = build output
 - [ ] Commit initial structure
 ```
 
@@ -81,12 +110,23 @@ cp konxc/playbook/templates/templates/ templates/
 
 ### Day 4: SOP & Templates
 
+**Organization Account:**
 ```markdown
 - [ ] docs/03-sop/code-review.md
 - [ ] docs/04-templates/github-issue.md
 - [ ] docs/04-templates/pull-request.md
-- [ ] Setup issue templates di .github/ISSUE_TEMPLATE/
-- [ ] Setup PR template di .github/pull_request_template.md
+- [ ] Setup issue templates di {org}/.github/ISSUE_TEMPLATE/
+- [ ] Setup PR template di {org}/.github/pull_request_template.md
+- [ ] Commit & push
+```
+
+**Personal Account:**
+```markdown
+- [ ] docs/03-sop/code-review.md
+- [ ] docs/04-templates/github-issue.md
+- [ ] docs/04-templates/pull-request.md
+- [ ] Setup issue templates di {username}/playbook/.github/ISSUE_TEMPLATE/
+- [ ] Setup PR template di {username}/playbook/.github/pull_request_template.md
 - [ ] Commit & push
 ```
 
@@ -187,6 +227,7 @@ cp konxc/playbook/templates/templates/ templates/
 
 ## 📊 Self-Assessment (End of Week 2)
 
+**Organization Account:**
 ```markdown
 ## Documentation
 - [ ] README.md complete
@@ -196,11 +237,45 @@ cp konxc/playbook/templates/templates/ templates/
 - [ ] Templates available
 
 ## Implementation
+- [ ] {org}/.github templates setup
 - [ ] .openkb/ structure setup
 - [ ] Git workflow followed
 - [ ] PR template used
 - [ ] Code review conducted
 - [ ] Sprint planning done
+
+## Project
+- [ ] Sprint 1 completed
+- [ ] Velocity tracked
+- [ ] Retrospective done
+- [ ] Action items identified
+
+Score: __/100%
+Target: > 70%
+```
+
+**Personal Account:**
+```markdown
+## Documentation
+- [ ] README.md complete
+- [ ] Onboarding docs written
+- [ ] Workflow docs clear
+- [ ] SOP documented
+- [ ] Templates available (di playbook/.github/)
+
+## Implementation
+- [ ] .openkb/ structure setup
+- [ ] Git workflow followed
+- [ ] PR template used
+- [ ] Code review conducted
+- [ ] Sprint planning done
+- [ ] Branch structure verified (main/handoff/gh-pages)
+
+## Infrastructure
+- [ ] {username}/{username}.github.io repo exists
+- [ ] Branch handoff exists dengan onboarding docs
+- [ ] SSH key setup untuk akun personal
+- [ ] Credential dipegang tim IT yayasan
 
 ## Project
 - [ ] Sprint 1 completed

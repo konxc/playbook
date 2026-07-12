@@ -4,7 +4,20 @@
 
 ---
 
+## ⚡ Account Type
+
+| | Organization | Personal |
+|---|---|---|
+| **Repo name** | `{org}/playbook` | `{username}/playbook` |
+| **Extra repos** | `{org}/.github` | Tidak perlu |
+| **Website repo** | `{org}/{project}` | `{username}/{username}.github.io` |
+| **Templates location** | `{org}/.github/` (repo terpisah) | `{username}/playbook/.github/` (di dalam playbook) |
+
+---
+
 ## 📁 Directory Structure
+
+### Organization Account
 
 ```
 {org}/playbook/
@@ -12,7 +25,7 @@
 ├── README.md
 ├── LICENSE
 ├── .gitignore
-├── .github/
+├── .github/                     ← (opsional, bisa juga di {org}/.github)
 │   ├── ISSUE_TEMPLATE/
 │   │   ├── feature-request.md
 │   │   └── bug-report.md
@@ -54,6 +67,66 @@
 │
 └── templates/
     └── ... (optional, additional templates)
+```
+
+### Personal Account
+
+```
+{username}/playbook/
+│
+├── README.md
+├── LICENSE
+├── .gitignore
+├── .github/                     ← pengganti {org}/.github (repo terpisah)
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── feature-request.md
+│   │   └── bug-report.md
+│   └── pull_request_template.md
+│
+├── docs/
+│   ├── 01-getting-started/
+│   │   ├── onboarding.md
+│   │   ├── environment-setup.md
+│   │   └── team-roles.md
+│   │
+│   ├── 02-workflow/
+│   │   ├── git-github-workflow.md
+│   │   ├── project-management.md
+│   │   └── communication.md
+│   │
+│   ├── 03-sop/
+│   │   ├── code-review.md
+│   │   ├── deployment.md
+│   │   └── testing.md
+│   │
+│   ├── 04-templates/
+│   │   ├── user-story.md
+│   │   ├── github-issue.md
+│   │   ├── pull-request.md
+│   │   └── sprint-planning.md
+│   │
+│   ├── 05-adr/
+│   │   └── ...
+│   │
+│   ├── 06-learning-path/
+│   │   └── junior-dev-roadmap.md
+│   │
+│   └── 07-project/
+│       ├── project-overview.md
+│       └── mvp-scope.md
+│
+├── .openkb/
+│   ├── SHARED/
+│   └── PERSONAL/               ← gitignored
+│
+└── templates/
+    └── ...
+
+{username}/{username}.github.io/
+│
+├── main                        ← source code website
+├── handoff                     ← onboarding documentation
+└── gh-pages                    ← build output untuk deployment
 ```
 
 ---
@@ -195,6 +268,8 @@ SOFTWARE.
 
 ## 🚀 Setup Commands
 
+### Organization Account
+
 ```bash
 # 1. Clone playbook repo
 git clone git@github.com:{org}/playbook.git
@@ -223,6 +298,61 @@ echo ".openkb/PERSONAL/" >> .gitignore
 git add .
 git commit -m "feat: initial playbook structure"
 git push -u origin main
+```
+
+### Personal Account
+
+```bash
+# 1. Clone playbook repo
+git clone git@github.com:{username}/playbook.git
+cd playbook
+
+# 2. Copy template structure
+cp ../konxc/playbook/templates/docs-template/ docs/
+cp ../konxc/playbook/templates/templates/ templates/
+
+# 3. Create .github structure (di dalam playbook, bukan repo terpisah)
+mkdir -p .github/ISSUE_TEMPLATE
+
+# 4. Copy templates
+cp ../konxc/playbook/.github/ISSUE_TEMPLATE/feature-request.md .github/ISSUE_TEMPLATE/
+cp ../konxc/playbook/.github/ISSUE_TEMPLATE/bug-report.md .github/ISSUE_TEMPLATE/
+cp ../konxc/playbook/.github/pull_request_template.md .github/
+
+# 5. Create .openkb structure
+mkdir -p .openkb/SHARED
+mkdir -p .openkb/PERSONAL
+
+# 6. Add to .gitignore
+echo ".openkb/PERSONAL/" >> .gitignore
+
+# 7. Initial commit
+git add .
+git commit -m "feat: initial playbook structure"
+git push -u origin main
+
+# 8. Setup website repo dengan branch structure
+git clone git@github.com:{username}/{username}.github.io.git
+cd {username}.github.io
+
+# Branch main = source code (sudah ada)
+
+# Buat branch handoff
+git checkout -b handoff
+# ... tambahkan onboarding docs
+git add .
+git commit -m "feat: onboarding documentation"
+git push -u origin handoff
+
+# Buat branch gh-pages
+git checkout --orphan gh-pages
+git rm -rf .
+# ... copy build output
+git add .
+git commit -m "Initial gh-pages"
+git push -u origin gh-pages
+
+git checkout main
 ```
 
 ---

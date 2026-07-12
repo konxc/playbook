@@ -51,7 +51,7 @@ konxc/playbook (Master)
 - Flat structure (semua di root `workspace/`)
 - Slug-based: `{org-slug}` atau `{username}`
 - Organization: `smauiiyk` (dari `SMA-UII-Yogyakarta`)
-- Personal: `sandikodev` (dari GitHub username)
+- Personal: `pantisajadah` (dari GitHub username)
 
 ---
 
@@ -73,17 +73,29 @@ konxc/playbook (Master)
 
 #### Current Partners
 
-| Partner | Playbook | Type | Status |
+| Partner | Playbook | Account Type | Status |
 |---|---|---|---|
 | **SMA UII Yogyakarta** | [`smauiiyk/`](workspace/smauiiyk/) | Organization | ✅ Active (v1.0.0) |
-| **{Your Org}** | `{slug}/` | Organization/Personal | 📝 Coming Soon |
+| **Yayasan Panti Sajadah** | [`pantisajadah/`](workspace/pantisajadah/) | Personal | 🚀 Onboarding |
+| **{Your Org/Personal}** | `{slug}/` | Organization/Personal | 📝 Coming Soon |
+
+**Account Types:**
+```
+Organization Accounts (tim >2 orang):
+├── smauiiyk/              # SMA-UII-Yogyakarta/playbook
+└── {org-slug}/            # {org}/playbook
+
+Personal Accounts (tim 1-2 orang):
+├── pantisajadah/          # pantisajadah/playbook
+└── {username}/            # {username}/playbook
+```
 
 **Examples:**
 ```
 workspace/
-├── smauiiyk/              # Git submodule → SMA-UII-Yogyakarta/playbook
-├── client1/               # Git submodule → client1/playbook
-├── sandikodev/            # Git submodule → Sandikodev/playbook
+├── smauiiyk/              # Git submodule → SMA-UII-Yogyakarta/playbook (org)
+├── pantisajadah/          # Git submodule → pantisajadah/playbook (personal)
+├── client1/               # Git submodule → client1/playbook (org)
 └── {slug}/                # Git submodule → {org-or-user}/playbook
 ```
 
@@ -257,9 +269,10 @@ Full checklist di [`quality-standard.md`](docs/05-quality-standard.md)
 
 **Partner Teams**
 
-| Organization | Project | Team Size |
-|---|---|---|
-| SMA UII Yogyakarta | SMART Absen | 4 (1 PM, 1 BA, 2 Dev) |
+| Partner | Account Type | Project | Team Size |
+|---|---|---|---|
+| SMA UII Yogyakarta | Organization | SMART Absen | 4 (1 PM, 1 BA, 2 Dev) |
+| Yayasan Panti Sajadah | Personal | Website + Donation App | 1-2 (IT + Sandikodev) |
 
 ---
 
@@ -270,9 +283,11 @@ Full checklist di [`quality-standard.md`](docs/05-quality-standard.md)
 | Repo | Description |
 |---|---|
 | [`konxc/playbook`](https://github.com/konxc/playbook) | **Master Playbook** (this repo) |
-| [`SMA-UII-Yogyakarta/playbook`](https://github.com/SMA-UII-Yogyakarta/playbook) | SMA UII Engineering Playbook |
+| [`SMA-UII-Yogyakarta/playbook`](https://github.com/SMA-UII-Yogyakarta/playbook) | SMA UII Engineering Playbook (org) |
 | [`SMA-UII-Yogyakarta/core`](https://github.com/SMA-UII-Yogyakarta/core) | Backend Laravel |
 | [`SMA-UII-Yogyakarta/aksesekolah`](https://github.com/SMA-UII-Yogyakarta/aksesekolah) | Monorepo entrypoint |
+| [`pantisajadah/playbook`](https://github.com/pantisajadah/playbook) | Panti Sajadah Playbook (personal) |
+| [`pantisajadah/pantisajadah.github.io`](https://github.com/pantisajadah/pantisajadah.github.io) | Website Panti Sajadah (personal) |
 
 ### OpenKB Protocol
 

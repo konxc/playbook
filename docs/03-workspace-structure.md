@@ -37,8 +37,19 @@ konxc/playbook/
 **Naming Convention:**
 - Gunakan **slug name** (lowercase, hyphen-separated)
 - Untuk organization: `{org-slug}` (e.g., `smauiiyk`, `client1`)
-- Untuk personal account: `{username}` (e.g., `sandikodev`, `personal-user`)
+- Untuk personal account: `{username}` (e.g., `pantisajadah`, `sandikodev`)
 - Semua langsung di root `workspace/` (flat structure)
+
+### Account Type Differences
+
+| | Organization | Personal |
+|---|---|---|
+| **Workspace slug** | `{org-slug}` | `{username}` |
+| **Submodule URL** | `git@github.com:{org}/playbook.git` | `git@github.com:{username}/playbook.git` |
+| **Website repo** | `{org}/{project}.git` | `{username}/{username}.github.io.git` |
+| **Branch (website)** | `main` + `gh-pages` | `main` + `handoff` + `gh-pages` |
+| **Templates** | `{org}/.github/` (repo terpisah) | `{username}/playbook/.github/` (di playbook) |
+| **Credential** | Org owner mengelola | Tim IT yayasan mengelola |
 
 ---
 
@@ -54,7 +65,7 @@ cd workspace
 git submodule add git@github.com:SMA-UII-Yogyakarta/playbook.git smauiiyk
 
 # Add personal account playbook (individual)
-git submodule add git@github.com:Sandikodev/playbook.git sandikodev
+git submodule add git@github.com:pantisajadah/playbook.git pantisajadah
 
 # Add another client playbook
 git submodule add git@github.com:client1/playbook.git client1
@@ -64,14 +75,14 @@ git submodule add git@github.com:client1/playbook.git client1
 ```
 workspace/
 ├── smauiiyk/                  # Organization submodule
-├── sandikodev/                # Personal account submodule
+├── pantisajadah/              # Personal account submodule
 └── client1/                   # Organization submodule
 ```
 
 **Slug Naming:**
-- `smauiiyk` → dari `github.com/SMA-UII-Yogyakarta/playbook`
-- `sandikodev` → dari `github.com/Sandikodev/playbook`
-- `client1` → dari `github.com/client1/playbook`
+- `smauiiyk` → dari `github.com/SMA-UII-Yogyakarta/playbook` (org)
+- `pantisajadah` → dari `github.com/pantisajadah/playbook` (personal)
+- `client1` → dari `github.com/client1/playbook` (org)
 
 ---
 
@@ -203,15 +214,14 @@ git push origin main
 
 ### Creating a New Partner Workspace
 
-**Step-by-step:**
-
+**Organization Account:**
 ```bash
 # 1. Partner create playbook repo di GitHub
 # https://github.com/client1/playbook (new repo)
 
 # 2. Sandikodev add submodule
 cd konxc/playbook
-git submodule add git@github.com:client1/playbook.git workspace/orgs/client1
+git submodule add git@github.com:client1/playbook.git workspace/client1
 git commit -m "Add client1 playbook submodule"
 git push origin main
 
@@ -225,6 +235,36 @@ git clone --recursive git@github.com:client1/playbook.git
 git push origin main
 
 # 6. Master playbook auto-linked (via submodule)
+```
+
+**Personal Account:**
+```bash
+# 1. Partner create playbook repo di GitHub
+# https://github.com/username/playbook (new repo)
+
+# 2. Partner create website repo dengan branch structure
+# https://github.com/username/username.github.io
+# Branch: main (source), handoff (onboarding), gh-pages (build)
+
+# 3. Sandikodev add submodule
+cd konxc/playbook
+git submodule add git@github.com:username/playbook.git workspace/username
+git commit -m "Add username playbook submodule"
+git push origin main
+
+# 4. Partner clone dengan submodules
+git clone --recursive git@github.com:username/playbook.git
+
+# 5. Partner populate playbook
+# (follow playbook-structure-template.md — personal account section)
+
+# 6. Partner setup credential management
+# SSH key, 2FA, access control
+
+# 7. Partner push ke playbook repo
+git push origin main
+
+# 8. Master playbook auto-linked (via submodule)
 ```
 
 ---
@@ -378,8 +418,9 @@ workspace/
 
 ```
 workspace/
-├── smauiiyk/       # SMA UII Yogyakarta
-├── client1/        # Client 1
+├── smauiiyk/       # SMA UII Yogyakarta (org)
+├── pantisajadah/   # Panti Sajadah (personal)
+├── client1/        # Client 1 (org)
 └── sandikodev/     # Personal/Sandikodev
 ```
 
@@ -452,8 +493,12 @@ workspace/
 - Write access: Sandikodev only
 - Read access: All partners
 
-# Partner playbook (smauiiyk/playbook)
+# Partner playbook - Organization (smauiiyk/playbook)
 - Write access: Partner team
+- Read access: Sandikodev (audit)
+
+# Partner playbook - Personal (pantisajadah/playbook)
+- Write access: Tim IT yayasan + Sandikodev (collaborator)
 - Read access: Sandikodev (audit)
 ```
 
@@ -466,9 +511,13 @@ Master Playbook (konxc/playbook):
 - Visibility: Public (showcase methodology)
 - Submodules: Can be private or public
 
-Partner Playbook (smauiiyk/playbook):
+Partner Playbook (Organization):
 - Visibility: Private (client confidentiality)
 - Exception: Open source clients can be public
+
+Partner Playbook (Personal):
+- Visibility: Private (default)
+- Website repo ({username}.github.io): Public (untuk GitHub Pages)
 ```
 
 ---
@@ -476,9 +525,10 @@ Partner Playbook (smauiiyk/playbook):
 ### SSH Key Management
 
 ```bash
-# Generate separate keys for different orgs
+# Generate separate keys for different accounts
 ssh-keygen -t ed25519 -f ~/.ssh/id_konxc
 ssh-keygen -t ed25519 -f ~/.ssh/id_smauii
+ssh-keygen -t ed25519 -f ~/.ssh/id_pantisajadah
 
 # Add to respective GitHub accounts
 # ~/.ssh/config:
@@ -492,6 +542,11 @@ Host github.com-smauii
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_smauii
+
+Host github.com-pantisajadah
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_pantisajadah
 ```
 
 ---
